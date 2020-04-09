@@ -1,0 +1,5 @@
+COLUMN_ID = 'ID'
+COLUMN_NAME = 'Name'
+MENTEE_CSV = 'mentee.csv'
+RESULT_CSV = 'result.csv'
+SUBMISSION_DIRECTORY_PATH = 'student-submissions'
