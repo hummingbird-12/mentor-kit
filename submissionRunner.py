@@ -4,8 +4,7 @@ from typing import Dict
 from Mentee import Mentee
 
 
-def prompt_with_options(prompt: str, options: [str] = None,
-                        allow_initial=False) -> str:
+def prompt_with_options(prompt: str, options: [str] = None) -> str:
     if options is None:
         options = ['y', 'n']
     while True:
