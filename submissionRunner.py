@@ -23,14 +23,16 @@ def runner(mentees: Dict[str, Mentee]):
         answer = 'run'
         while True:
             if answer == 'run':
+                input_file = open('input.txt')
                 print()
                 print('-' * 12, 'BEGINNING OF OUTPUT', '-' * 12)
                 if sys.platform == 'win32':
-                    subprocess.call(['python', mentee.file])
+                    subprocess.run(['python', mentee.file], stdin=input_file)
                 else:
-                    subprocess.call(['python3', mentee.file])
+                    subprocess.run(['python3', mentee.file], stdin=input_file)
                 print('-' * 12, 'END OF OUTPUT', '-' * 12)
                 print()
+                input_file.close()
             if answer == 'code':
                 file = open(mentee.file, encoding='utf-8')
                 print()
