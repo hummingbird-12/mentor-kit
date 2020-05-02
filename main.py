@@ -8,7 +8,7 @@ def main():
     mentees = menteesManager.create_mentees()
 
     fileFilter.filter_files(mentees)
-    fileFilter.print_submission_result(mentees)
+    fileFilter.print_filtering_result(mentees)
     input('Press ENTER to continue...')
 
     submissionRunner.runner(mentees)

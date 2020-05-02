@@ -1,6 +1,6 @@
 import csv
 from typing import Dict
-from Mentee import Mentee
+from models import Mentee
 from environment import *
 
 
@@ -21,14 +21,25 @@ def create_mentees() -> Dict[str, Mentee]:
 
 # Create result csv file
 def create_result_csv(mentees: Dict[str, Mentee]):
-    with open(RESULT_CSV, 'w', encoding='utf-8') as result_file:
-        field_names = ['ID', 'name', 'score', 'note']
+    with open(RESULT_CSV, 'w', encoding='utf-8', newline='') as result_file:
+        field_names = ['ID', 'name', 'file', 'score', 'note']
         writer = csv.DictWriter(result_file, fieldnames=field_names)
         writer.writeheader()
         for mentee in mentees.values():
-            mentee.print_submission_summary()
-            info = {}
-            for field in field_names:
-                info[field] = mentee.__getattribute__(field)
-            writer.writerow(info)
+            print()
+            print('-' * 12, 'SUMMARY OF SUBMISSIONS', '-' * 12)
+            mentee.print_submissions_summary()
+            print('-' * 47)
+            print()
+
+            for submission in mentee.submissions:
+                info = {
+                    'ID': mentee.ID,
+                    'name': mentee.name,
+                    'file': submission.file_name,
+                    'score': submission.score,
+                    'note': submission.note
+                }
+                writer.writerow(info)
+
         return mentees

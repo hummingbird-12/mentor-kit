@@ -1,7 +1,8 @@
 import os
 from typing import Dict
-from Mentee import Mentee
+from models import Mentee
 from environment import *
+import sys
 
 
 # Filter out files not corresponding to the mentees
@@ -11,10 +12,22 @@ def filter_files(mentees: Dict[str, Mentee]) -> [str]:
         dash = file.index('-')
         bracket = file.index(']')
         file_id = file[dash + 1:bracket]
+        file_name = file[1:dash]
         full_path = os.path.join(SUBMISSION_DIRECTORY_PATH, file)
 
         if file_id in mentees:
-            mentees[file_id].assign_submission(full_path)
+            if sys.platform == 'win32':
+                delimiter = '\\'
+            else:
+                delimiter = '/'
+            new_name = full_path.split(delimiter)[-1]
+            new_name = '[{}-{}]{}'.format(file_id, file_name,
+                                          new_name.split(']')[-1])
+            path = full_path.split(delimiter)[:-1]
+            path.append(new_name)
+            new_path = delimiter.join(path)
+            os.rename(full_path, new_path)
+            mentees[file_id].assign_submission(new_path)
         else:
             print("Deleting " + full_path)
             os.remove(full_path)
@@ -22,7 +35,7 @@ def filter_files(mentees: Dict[str, Mentee]) -> [str]:
 
 
 # List mentees who did not submit
-def print_submission_result(mentees: Dict[str, Mentee]) -> None:
+def print_filtering_result(mentees: Dict[str, Mentee]) -> None:
     not_submitted: [Mentee] = list(
         filter(lambda m: not m.submitted, mentees.values()))
     if len(not_submitted) == 0:
