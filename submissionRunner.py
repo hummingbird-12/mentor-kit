@@ -1,3 +1,4 @@
+import os.path
 import subprocess
 import sys
 from typing import Dict
@@ -21,14 +22,17 @@ def run_c_file(file: str):
         print('File {} is not a .c file!'.format(file))
         return
 
+    if not os.path.isdir(OUTPUT_DIRECTORY):
+        os.mkdir(OUTPUT_DIRECTORY)
+
     with open('input.txt', encoding='utf-8') as input_file:
-        file_name = file.rstrip('.c')
+        file_name = file.rstrip('.c').split('/')[-1]
         output_file = '{}/{}.out'.format(OUTPUT_DIRECTORY, file_name)
         if sys.platform == 'win32':
             pass
         else:
-            subprocess.run(['gcc', '-o', output_file, file], stdin=input_file)
-            subprocess.run(output_file)
+            subprocess.run(['gcc', '-o', output_file, file])
+            subprocess.run(output_file, stdin=input_file)
         input_file.close()
 
 

@@ -17,6 +17,9 @@ def main():
     menteesManager.create_result_csv(mentees)
     print('{} has been created.'.format(RESULT_CSV))
 
+    if input('Clean up submission and output directories? [Y] ') == 'Y':
+        fileFilter.cleanup_files()
+
 
 if __name__ == "__main__":
     main()

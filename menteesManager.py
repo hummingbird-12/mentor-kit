@@ -32,13 +32,23 @@ def create_result_csv(mentees: Dict[str, Mentee]):
             print('-' * 47)
             print()
 
-            for submission in mentee.submissions:
+            if mentee.submitted:
+                for submission in mentee.submissions:
+                    info = {
+                        'ID': mentee.ID,
+                        'name': mentee.name,
+                        'file': submission.file_name,
+                        'score': submission.score,
+                        'note': submission.note
+                    }
+                    writer.writerow(info)
+            else:
                 info = {
                     'ID': mentee.ID,
                     'name': mentee.name,
-                    'file': submission.file_name,
-                    'score': submission.score,
-                    'note': submission.note
+                    'file': '',
+                    'score': 0,
+                    'note': 'NO SUBMISSION'
                 }
                 writer.writerow(info)
 
