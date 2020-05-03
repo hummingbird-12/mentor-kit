@@ -80,7 +80,7 @@ fabric.properties
 .idea/caches/build_file_checksums.ser
 
 ### Project-specific
-student-submissions
+submissions/*
 *.csv
 input.txt
 output/*
