@@ -84,5 +84,5 @@ submissions/*
 *.csv
 input.txt
 output/*
-venv/Include/*
-venv/Lib/*
+venv/*
+!venv/Scripts/*
