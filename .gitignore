@@ -84,5 +84,6 @@ submissions/*
 *.csv
 input.txt
 output/*
+__pycache__/*
 venv/*
 !venv/Scripts/*
