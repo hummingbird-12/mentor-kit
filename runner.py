@@ -118,7 +118,6 @@ def runner(mentees: Dict[str, Mentee]):
                     print()
                     print('-' * 12, 'BEGINNING OF CODE', '-' * 12)
                     submission.print_file_content()
-                    print()
                     print('-' * 12, 'END OF CODE', '-' * 12)
                     print()
                 if answer == 'evaluate':

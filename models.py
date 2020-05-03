@@ -55,10 +55,14 @@ class Submission:
         self.note = note
 
     def print_file_content(self):
+        empty_line = False
         with open(self.file, encoding='utf-8') as opened_file:
             for line in opened_file.readlines():
+                empty_line = len(line.rstrip(' \n\r\t')) == 0
                 print(line.rstrip(' \n\r\t'))
             opened_file.close()
+            if empty_line:
+                print()
 
     def print_file_info(self):
         print('File:', self.file_name)
