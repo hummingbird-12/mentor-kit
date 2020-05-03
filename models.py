@@ -3,12 +3,6 @@ import sys
 
 
 class Mentee:
-    ID: str
-    name: str
-
-    submissions: [Submission]
-    submitted: bool
-
     def __init__(self, _id: str, name: str):
         self.ID = _id
         self.name = name
@@ -38,12 +32,6 @@ class Mentee:
 
 
 class Submission:
-    file: str
-    mentee_id: str
-    mentee_name: str
-    score: int
-    note: str
-
     @property
     def file_extension(self):
         return '.'+self.file.split('.')[-1]
@@ -59,7 +47,7 @@ class Submission:
         self.file = file
         self.mentee_id = mentee.ID
         self.mentee_name = mentee.name
-        self.scores = 0
+        self.score = 0
         self.note = ''
 
     def assign_result(self, score: int, note: str = ''):

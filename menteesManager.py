@@ -6,7 +6,7 @@ from environment import *
 
 # Create mentees from CSV file
 def create_mentees() -> Dict[str, Mentee]:
-    mentees: Dict[str, Mentee] = {}
+    mentees = {}
     with open(MENTEE_CSV, encoding='utf-8') as mentee_file:
         reader = csv.DictReader(mentee_file)
         for row in reader:

@@ -53,7 +53,7 @@ def filter_files(mentees: Dict[str, Mentee]) -> [str]:
 
 # List mentees who did not submit
 def print_filtering_result(mentees: Dict[str, Mentee]) -> None:
-    not_submitted: [Mentee] = list(
+    not_submitted = list(
         filter(lambda m: not m.submitted, mentees.values()))
     if len(not_submitted) == 0:
         print('Everybody submitted!')
