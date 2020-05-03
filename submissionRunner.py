@@ -31,8 +31,12 @@ def run_c_file(file: str):
         if sys.platform == 'win32':
             pass
         else:
-            subprocess.run(['gcc', '-o', output_file, file])
-            subprocess.run(output_file, stdin=input_file)
+            try:
+                subprocess.run(['gcc', '-o', output_file, file])
+                subprocess.run(output_file, stdin=input_file)
+            except FileNotFoundError:
+                print('Compile error has occurred')
+
         input_file.close()
 
 
