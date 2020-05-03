@@ -52,4 +52,21 @@ def create_result_csv(mentees: Dict[str, Mentee]):
                 }
                 writer.writerow(info)
 
+        result_file.close()
+        # print_csv()
+
         return mentees
+
+
+def print_csv():
+    with open(RESULT_CSV, encoding='utf-8') as result_file:
+        header_line = result_file.readline()
+        for header in header_line.split(','):
+            print(header.capitalize(), end='\t')
+        print()
+
+        for result in result_file.readlines():
+            for data in result.split(','):
+                print(data, end='\t')
+            print()
+        result_file.close()

@@ -19,10 +19,11 @@ class Mentee:
         self.submitted = True
 
     def print_info(self):
-        print('ID:  ', self.ID)
-        print('Name:', self.name)
+        print('ID:\t', self.ID)
+        print('Name:\t', self.name)
 
     def print_submissions_summary(self):
+        self.print_info()
         if self.submitted:
             for submission in self.submissions:
                 submission.print_file_info()
