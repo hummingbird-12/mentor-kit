@@ -1,4 +1,5 @@
 import csv
+import pandas as pd
 from typing import Dict
 from models import Mentee
 from environment import *
@@ -6,7 +7,7 @@ from environment import *
 
 # Create mentees from CSV file
 def create_mentees() -> Dict[str, Mentee]:
-    mentees: Dict[str, Mentee] = {}
+    mentees = {}
     with open(MENTEE_CSV, encoding='utf-8') as mentee_file:
         reader = csv.DictReader(mentee_file)
         for row in reader:
@@ -52,4 +53,25 @@ def create_result_csv(mentees: Dict[str, Mentee]):
                 }
                 writer.writerow(info)
 
+        result_file.close()
+        print_csv()
+
         return mentees
+
+
+def print_csv():
+    panda_read = pd.read_csv(RESULT_CSV, encoding='utf-8')
+    print(panda_read)
+
+
+    # with open(RESULT_CSV, encoding='utf-8') as result_file:
+    #     header_line = result_file.readline()
+    #     for header in header_line.split(','):
+    #         print(header.capitalize(), end='\t')
+    #     print()
+    #
+    #     for result in result_file.readlines():
+    #         for data in result.split(','):
+    #             print(data, end='\t')
+    #         print()
+    #     result_file.close()

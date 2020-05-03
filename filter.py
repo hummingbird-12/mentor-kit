@@ -8,9 +8,9 @@ import sys
 
 def cleanup_files():
     print('Deleting submission files...')
-    submission_files = os.listdir(SUBMISSION_DIRECTORY)
+    submission_files = os.listdir(SUBMISSIONS_DIRECTORY)
     for file in submission_files:
-        full_path = os.path.join(SUBMISSION_DIRECTORY, file)
+        full_path = os.path.join(SUBMISSIONS_DIRECTORY, file)
         os.remove(full_path)
 
     print('Deleting output files...')
@@ -24,13 +24,19 @@ def cleanup_files():
 
 # Filter out files not corresponding to the mentees
 def filter_files(mentees: Dict[str, Mentee]) -> [str]:
-    submission_files = os.listdir(SUBMISSION_DIRECTORY)
+    if not os.path.isdir(SUBMISSIONS_DIRECTORY):
+        print(
+            'Please place the submission files into the {} directory!'.format(
+                SUBMISSIONS_DIRECTORY))
+        os.mkdir(SUBMISSIONS_DIRECTORY)
+
+    submission_files = os.listdir(SUBMISSIONS_DIRECTORY)
     for file in submission_files:
         dash = file.index('-')
         bracket = file.index(']')
         file_id = file[dash + 1:bracket]
         file_name = file[1:dash]
-        full_path = os.path.join(SUBMISSION_DIRECTORY, file)
+        full_path = os.path.join(SUBMISSIONS_DIRECTORY, file)
 
         if file_id in mentees:
             if sys.platform == 'win32':
@@ -48,16 +54,16 @@ def filter_files(mentees: Dict[str, Mentee]) -> [str]:
         else:
             print("Deleting " + full_path)
             os.remove(full_path)
-    return os.listdir(SUBMISSION_DIRECTORY)
+    return os.listdir(SUBMISSIONS_DIRECTORY)
 
 
 # List mentees who did not submit
 def print_filtering_result(mentees: Dict[str, Mentee]) -> None:
-    not_submitted: [Mentee] = list(
+    not_submitted = list(
         filter(lambda m: not m.submitted, mentees.values()))
     if len(not_submitted) == 0:
         print('Everybody submitted!')
     else:
-        print('Mentees not submitted:')
+        print('Mentees with no submission:')
         for noSubmit in not_submitted:
             print(noSubmit.name)
