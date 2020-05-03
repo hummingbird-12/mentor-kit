@@ -36,7 +36,7 @@
         cd venv\Scripts
         activate.bat
         # Notice that `(venv)` has been added in front of the input prompt
-        pip3 install -r ../../requiremetns.txt 
+        pip3 install -r ..\..\requiremetns.txt 
         cd ..\..\
         ```
 3. Add students' (or mentees') into `mentee.csv` file.
