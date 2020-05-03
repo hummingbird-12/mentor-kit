@@ -111,12 +111,14 @@ def runner(mentees: Dict[str, Mentee]):
                     else:
                         print('Extension .{} is not yet supported!'.format(
                             file_extension))
+                    print()
                     print('-' * 12, 'END OF OUTPUT', '-' * 12)
                     print()
                 if answer == 'code':
                     print()
                     print('-' * 12, 'BEGINNING OF CODE', '-' * 12)
                     submission.print_file_content()
+                    print()
                     print('-' * 12, 'END OF CODE', '-' * 12)
                     print()
                 if answer == 'evaluate':
