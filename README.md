@@ -2,6 +2,7 @@
 
 ## Features
 * Submission file filtering
+    - Provide a batch download of submission files, and the program will sort out files only of the mentees you want to evaluate.
 * Submission file runner
     - `.py`
     - `.c` (only on Linux, with `gcc`)
